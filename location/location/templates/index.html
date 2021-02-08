@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+           index page
+        </title>
+    </head>
+    <body>
+       {% if something %}
+       <p>
+           Welcome to my app 
+       </p>
+       <form action="index.html" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+                <input type="file" name="myFile"><br>
+                <input type="submit" name="submit">
+        </form>
+        <hr>
+        {% for row in excel_data %}
+
+            {% for cell in row %}
+                {{ cell }}&nbsp;&nbsp;
+                
+        {% endfor %}
+        <br>
+    {% endfor %}
+           
+
+       {%else %}
+       <a href="/upload"> please upload the file</a>
+       {% endif%}
+    </body>
+</html>
