@@ -37,5 +37,5 @@ def home(request):
 
         return render(request , "fileupload.html")
 
-#def upload(request):
- #   return render(request , "fileupload.html")
+def upload(request):
+    return render(request , "fileupload.html")
