@@ -12,21 +12,21 @@ def home(request):
         file = request.FILES["myFile"]
         wb = openpyxl.load_workbook(file)
         active_sheet = wb.active
-        excel_data = list()
-        for row in active_sheet.iter_rows():
-            row_data = list()
-            for cell in row:
-                row_data.append(str(cell.value))
-            excel_data.append(row_data)
+        #excel_data = list()
+        #for row in active_sheet.iter_rows():
+         #   row_data = list()
+          #  for cell in row:
+           #     row_data.append(str(cell.value))
+           # excel_data.append(row_data)
         gmaps_key = googlemaps.Client(key ="AIzaSyDmHr39todYYu2unRk-3nsvuwNpCEmiUhY")
         excel = pd.read_excel(file)
-        excel["latitude"] = None
-        excel["longitude"] = None
+        excel["LAT"] = None
+        excel["LON"] = None
         for i in range(0, len(excel),1):
             geocode_result = gmaps_key.geocode(excel.iat[i,0])
             try:
                 lat= geocode_result[0]["geometry"]["location"]["lat"]
-                lon= geocode_result[0]["geometry"]["location"]["colon"]
+                lon= geocode_result[0]["geometry"]["location"]["lng"]
                 excel.iat[i ,excel.columns.get_loc("LAT")] = lat
                 excel.iat[i ,excel.columns.get_loc("LON")] = lon
             except:
